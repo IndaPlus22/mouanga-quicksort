@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 void print_list(const int* arr, const int len) {
     for(int i = 0; i < len; i++) {
@@ -25,28 +26,16 @@ void isort(int* arr, const int len) {
     }
 }
 
-int check_sorted(const int* arr, const int len) {
-    if (len < 2) {
-        return 1;
-    }
 
-    for(int i = 1; i++; i < len) {
-        if (arr[i] < arr[i - 1]) {
-            return 0;
-        }
-    }
-
-    return 1;
-}
 
 int partition(int* arr, int low, int high) {
-    int pivot = arr[low];
+    int pivot = arr[(low + high) / 2];
     int i = low - 1;
     int j = high + 1;
 
     for(;;) {
         do {i++;} while(arr[i] < pivot);
-        do {j--;} while(arr[j] >  pivot);
+        do {j--;} while(arr[j] > pivot);
 
         if (i >= j) {
             return j;
@@ -57,18 +46,32 @@ int partition(int* arr, int low, int high) {
 
 }
 
-void quicksort(int* arr, const int low, const int high) {
-    if (high - low < 5 && high > 0) {
+void _quicksort(int* arr, const int low, const int high) {
+    if (high - low < 30 && high > 0) {
         int _len = high - low + 1;
         isort(&arr[low], _len);
         return;
     }
     if(low >= 0 && high >= 0 && low < high) {
         int partition_index = partition(arr, low, high);
-        quicksort(arr, low, partition_index);
-        quicksort(arr, partition_index + 1, high);  
+        _quicksort(arr, low, partition_index);
+        _quicksort(arr, partition_index + 1, high);  
     }
 }
+
+void quicksort(int* arr, const int low, const int high) {
+    if (high - low < 30 && high > 0) {
+        int _len = high - low + 1;
+        isort(&arr[low], _len);
+        return;
+    }
+    if(low >= 0 && high >= 0 && low < high) {
+        int partition_index = partition(arr, low, high);
+        _quicksort(arr, low, partition_index);
+        _quicksort(arr, partition_index + 1, high);  
+    }
+}
+
 
 int main() {
 

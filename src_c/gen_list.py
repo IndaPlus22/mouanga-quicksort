@@ -3,8 +3,8 @@
 
 import random
 string = "100000\n"
-for _ in range(100000):
-    RANDINT = random.randint(-100000, 100000)
+for _ in range(10000):
+    RANDINT = random.randint(-10000, 10000)
     string += f" {RANDINT}"
 
 with open("test.txt", "w") as z:
