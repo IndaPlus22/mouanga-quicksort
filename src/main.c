@@ -7,13 +7,13 @@ void print_list(const int* arr, const int len) {
     printf("\n");
 }
 
-
 // a and b are not the indices, they are the addresses of the values
 void swap(int* a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
+
 
 void isort(int* arr, const int len) {
     for(int i = 1; i < len; i++) {
@@ -24,7 +24,6 @@ void isort(int* arr, const int len) {
         }
     }
 }
-
 
 
 int partition(int* arr, int low, int high) {
@@ -45,7 +44,7 @@ int partition(int* arr, int low, int high) {
 
 }
 
-void _quicksort(int* arr, const int low, const int high) {
+void quicksort(int* arr, const int low, const int high) {
     if (high - low < 30 && high > 0) {
         int _len = high - low + 1;
         isort(&arr[low], _len);
@@ -53,21 +52,8 @@ void _quicksort(int* arr, const int low, const int high) {
     }
     if(low >= 0 && high >= 0 && low < high) {
         int partition_index = partition(arr, low, high);
-        _quicksort(arr, low, partition_index);
-        _quicksort(arr, partition_index + 1, high);  
-    }
-}
-
-void quicksort(int* arr, const int low, const int high) {
-    if (high - low < 100 && high > 0) {
-        int _len = high - low + 1;
-        isort(&arr[low], _len);
-        return;
-    }
-    if(low >= 0 && high >= 0 && low < high) {
-        int partition_index = partition(arr, low, high);
-        _quicksort(arr, low, partition_index);
-        _quicksort(arr, partition_index + 1, high);  
+        quicksort(arr, low, partition_index);
+        quicksort(arr, partition_index + 1, high);  
     }
 }
 
