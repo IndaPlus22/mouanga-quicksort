@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 
 void print_list(const int* arr, const int len) {
     for(int i = 0; i < len; i++) {
@@ -60,7 +59,7 @@ void _quicksort(int* arr, const int low, const int high) {
 }
 
 void quicksort(int* arr, const int low, const int high) {
-    if (high - low < 30 && high > 0) {
+    if (high - low < 100 && high > 0) {
         int _len = high - low + 1;
         isort(&arr[low], _len);
         return;
